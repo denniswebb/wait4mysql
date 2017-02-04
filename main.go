@@ -17,13 +17,13 @@ var (
 )
 
 func init() {
-	username = getenv("MYSQL_USERNAME","root")
-	password = getenv("MYSQL_PASSWORD","")
-	host = getenv("MYSQL_HOST","mysql")
-	port = getenv("MYSQL_PORT","3306")
+	username = getenv("USERNAME","root")
+	password = getenv("PASSWORD","")
+	host = getenv("HOST","mysql")
+	port = getenv("PORT","3306")
 
 	var err	error
-	timeout, err = strconv.Atoi(getenv("MYSQL_TIMEOUT", "60"))
+	timeout, err = strconv.Atoi(getenv("TIMEOUT", "60"))
 	if err != nil {
 		timeout = 60
 	}
@@ -45,15 +45,16 @@ func main() {
 
 		err = db.Ping()
 		if err != nil {
-			fmt.Printf("%s\n",err.Error())
 			switch err.(type) {
 			case *mysql.MySQLError:
-				fmt.Printf("Connected.\n")
-				os.Exit(0)
+			default:
+				fmt.Print(".")
+				time.Sleep(1 * time.Second)
+				continue
 			}
 		}
-		fmt.Print(".")
-		time.Sleep(1 * time.Second)
+		fmt.Printf("Connected.\n")
+		os.Exit(0)
 	}
 
 	fmt.Printf("\nOperation timed out in %d seconds.\n", timeout)
