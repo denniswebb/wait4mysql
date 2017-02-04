@@ -45,6 +45,7 @@ func main() {
 
 		err = db.Ping()
 		if err != nil {
+			fmt.Printf("%s\n",err.Error())
 			switch err.(type) {
 			case *mysql.MySQLError:
 				fmt.Printf("Connected.\n")
