@@ -1,4 +1,5 @@
 # wait4mysql
+[![](https://images.microbadger.com/badges/version/dhwebb/wait4mysql:light.svg)](https://hub.docker.com/r/dhwebb/wait4mysql/)[![](https://images.microbadger.com/badges/image/dhwebb/wait4mysql:light.svg)](https://microbadger.com/images/dhwebb/wait4mysql:light)
 
 Waits on a MySQL container to become available before exiting.
 
