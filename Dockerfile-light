@@ -1,9 +1,0 @@
-FROM alpine:latest
-MAINTAINER "Dennis Webb <dhwebb@gmail.com>"
-
-RUN apk add --no-cache --update curl jq && \
-    URL=$(curl -s https://api.github.com/repos/denniswebb/wait4mysql/releases/latest | jq -r ".assets[] | select(.name == \"linux-amd64\") | .browser_download_url") && \
-    curl -SsL --retry 5 "${URL}" > /usr/local/bin/wait4mysql && \
-    chmod +x /usr/local/bin/wait4mysql
-
-ENTRYPOINT ["wait4mysql"]
