@@ -2,27 +2,28 @@ package main
 
 import (
 	"database/sql"
-	"os"
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 	"strconv"
 	"time"
+
 	"github.com/go-sql-driver/mysql"
 )
 
 var (
 	username, password, host, port string
-	timeout int
+	timeout                        int
 )
 
 func init() {
-	username = getenv("USERNAME","root")
-	password = getenv("PASSWORD","")
-	host = getenv("HOST","mysql")
-	port = getenv("PORT","3306")
+	username = getenv("USERNAME", "root")
+	password = getenv("PASSWORD", "")
+	host = getenv("HOST", "mysql")
+	port = getenv("PORT", "3306")
 
-	var err	error
+	var err error
 	timeout, err = strconv.Atoi(getenv("TIMEOUT", "60"))
 	if err != nil {
 		timeout = 60
@@ -32,7 +33,7 @@ func init() {
 }
 
 func main() {
-	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/",username,password,host,port))
+	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/", username, password, host, port))
 	if err != nil {
 		fmt.Printf("Unexpected error: %s\n", err)
 		os.Exit(1)
