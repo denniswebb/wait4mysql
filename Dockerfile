@@ -5,7 +5,7 @@ WORKDIR /go/src/github.com/denniswebb/wait4mysql
 COPY main.go .
 
 RUN go get ./... && \
-    go build -o wait4mysql
+    CGO_ENABLED=0 GOOS=linux go build -ldflags "-s" -a -installsuffix cgo -o wait4mysql
 
 FROM alpine:latest
 MAINTAINER "Dennis Webb <dhwebb@gmail.com>"
